@@ -73,3 +73,25 @@ const s = results<NetworkLoadingState>(NetworkLoadingStates)
 type FirstArg<T extends any[]> = T extends [...any[], infer R] ? R : T extends [] ? undefined : never
 
 type v = FirstArg<['as', 'f']>
+
+
+// never type with generic
+enum EParams {
+  A,B,C
+}
+
+function name<T extends EParams>(params:T):T {
+  switch (params) {
+    case EParams.A:
+      return params
+    case EParams.B:
+      return params
+    case EParams.C:
+      return params
+    default:
+      return params as never
+  }
+}
+
+const value:number = 5
+const data = name(value)
